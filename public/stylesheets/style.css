@@ -80,11 +80,7 @@ input[type="text"] {
 }
 
 .chat-form {
-    /*flex-grow: 0.1;*/
-    padding-top: 25px;
-    padding-bottom: 25px;
-    padding-left: 100px;
-    padding-right: 100px;
+    padding: 25px;
 }
 
 
@@ -92,7 +88,7 @@ input[type="text"] {
 .chatmessage {
     display: block;
     position: relative;
-    width: 70%;
+    width: 60%;
     margin-bottom: 30px;
 }
 .chatmessage.human {
