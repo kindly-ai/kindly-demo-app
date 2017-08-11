@@ -21,12 +21,20 @@ router.post('/chatmessage', function(req, res) {
     });
     chatmessage.save();
 
-    let chatmessage_reply = new models.ChatMessage({
-        chat_id: req.body.chat_id,
-        message: "This is a reply to the very silly message '" + req.body.message + "' from some user",
-        from_bot: true,
-    });
-    chatmessage_reply.save();
+    req.io.sockets.emit('chatmessage', chatmessage);
+
+    setTimeout(() => {
+
+        let chatmessage_reply = new models.ChatMessage({
+            chat_id: req.body.chat_id,
+            message: "This is a reply to the very silly message '" + req.body.message + "' from some user",
+            from_bot: true,
+        });
+        chatmessage_reply.save();
+
+        req.io.sockets.emit('chatmessage', chatmessage_reply);
+
+    }, 1000);
 });
 
 module.exports = router;

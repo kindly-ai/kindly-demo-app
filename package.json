@@ -3,7 +3,7 @@
     "version": "0.0.0",
     "private": true,
     "scripts": {
-        "start": "node ./bin/www",
+        "start": "node app.js",
         "dev": "nodemon ./bin/www",
         "prod": "webpack -p --env=production --config webpack.config.js --progress --display-error-details",
         "seed": "node seed.js"
@@ -22,7 +22,8 @@
         "react": "^0.14.3",
         "react-dom": "^0.14.3",
         "resolve-url-loader": "^2.1.0",
-        "serve-favicon": "~2.4.2"
+        "serve-favicon": "~2.4.2",
+        "socket.io": "^2.0.3"
     },
     "devDependencies": {
         "babel-core": "^6.22.1",
