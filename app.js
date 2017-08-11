@@ -1,6 +1,5 @@
 const express = require('express');
 const path = require('path');
-const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
@@ -9,14 +8,14 @@ const webpackMiddleware = require('webpack-dev-middleware');
 const config = require('./webpack.config.js');
 const mongoose = require('mongoose');
 
-// mongoose.connect(process.env.MONGODB_URI, {
-//     useMongoClient: true,
-//     reconnectTries: 10000,
-// });
-//
-// var db = mongoose.connection;
-// db.on('error', console.error.bind(console, 'mongodb[error]'));
-// db.on('timeout', console.error.bind(console, 'mongodb[timeout]'));
+mongoose.connect(process.env.MONGODB_URI, {
+    useMongoClient: true,
+    reconnectTries: 10000,
+});
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'mongodb[error]'));
+db.on('timeout', console.error.bind(console, 'mongodb[timeout]'));
 
 var app = express();
 
@@ -27,12 +26,12 @@ if (isDeveloping) {
         publicPath: config.output.publicPath,
         contentBase: 'src',
         stats: {
-            colors: true,
-            hash: false,
-            timings: true,
-            chunks: false,
-            chunkModules: false,
-            modules: false,
+            colors:         true,
+            hash:           false,
+            timings:        true,
+            chunks:         false,
+            chunkModules:   false,
+            modules:        false,
         }
     });
 
@@ -54,9 +53,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/', require('./routes/index'));
 
-
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

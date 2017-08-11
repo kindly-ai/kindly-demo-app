@@ -5,14 +5,16 @@
     "scripts": {
         "start": "node ./bin/www",
         "dev": "nodemon ./bin/www",
-        "prod": "webpack -p --env=production --config webpack.config.js --progress --display-error-details"
+        "prod": "webpack -p --env=production --config webpack.config.js --progress --display-error-details",
+        "seed": "node seed.js"
     },
     "dependencies": {
+        "axios": "^0.16.2",
         "babel-cli": "^6.4.0",
         "body-parser": "~1.17.1",
         "cookie-parser": "~1.4.3",
         "debug": "~2.6.3",
-        "express": "~4.15.2",
+        "express": "^4.15.4",
         "mongoose": "^4.11.5",
         "morgan": "~1.8.1",
         "normalize.css": "^7.0.0",
