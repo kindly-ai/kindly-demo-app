@@ -2,16 +2,32 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import styles from './styles/main.scss';
+import classNames from 'classnames';
 
 class App extends React.Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            chatmessages: [],
+        };
         this.sendMessage = this.sendMessage.bind(this);
     }
     componentDidMount() {
-        this.autoScrollToBottom();
-        this.messageInput.focus();
+        axios
+        .get('/chatmessages')
+        .then((response) => {
+            this.setState({
+                chatmessages: response.data,
+            });
+        })
+        .catch((error) => {
+            console.trace(error);
+        })
+        .then(() => {
+            this.autoScrollToBottom();
+            this.messageInput.focus();
+        });
     }
     handleSubmit(event) {
         event.preventDefault();
@@ -26,7 +42,7 @@ class App extends React.Component {
         }
 
         axios.post(
-            '/message',
+            '/chatmessage',
             {
                 chat_id: "598dcde4b98a0b0010ccaf56",
                 message: obj.message,
@@ -44,76 +60,36 @@ class App extends React.Component {
         return (
             <div className="chat-demo">
                 <div className="chat-messages" ref={(div) => { this.messageList = div; }}>
-                    <div>
-                        <div className="chatmessage human">
-                            <img className="avatar" src={require('./images/default_avatar.jpg')} />
-                            <div className="message">
-                                Hva kan du gjøre?
-                            </div>
-                        </div>
-                        <div className="chatmessage bot">
-                            <img className="avatar" src={require('./images/kindly-happy.svg')} />
-                            <div className="message">
-                                Jeg kan hjelpe deg med spørsmål du har om Convertelligence, produktene våre og kundeservice! Jeg er nyansatt og under opplæring så jeg kan ikke svare på alt enda, men jeg lærer nye ting hver dag, og hvis jeg ikke kan svaret selv kan jeg prøve å sende deg i retning av noen som kan mer🤓
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div className="chatmessage human">
-                            <img className="avatar" src={require('./images/default_avatar.jpg')} />
-                            <div className="message">
-                                Hva kan du gjøre?
-                            </div>
-                        </div>
-                        <div className="chatmessage bot">
-                            <img className="avatar" src={require('./images/kindly-happy.svg')} />
-                            <div className="message">
-                                Jeg kan hjelpe deg med spørsmål du har om Convertelligence, produktene våre og kundeservice! Jeg er nyansatt og under opplæring så jeg kan ikke svare på alt enda, men jeg lærer nye ting hver dag, og hvis jeg ikke kan svaret selv kan jeg prøve å sende deg i retning av noen som kan mer🤓
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div className="chatmessage human">
-                            <img className="avatar" src={require('./images/default_avatar.jpg')} />
-                            <div className="message">
-                                Hva kan du gjøre?
-                            </div>
-                        </div>
-                        <div className="chatmessage bot">
-                            <img className="avatar" src={require('./images/kindly-happy.svg')} />
-                            <div className="message">
-                                Jeg kan hjelpe deg med spørsmål du har om Convertelligence, produktene våre og kundeservice! Jeg er nyansatt og under opplæring så jeg kan ikke svare på alt enda, men jeg lærer nye ting hver dag, og hvis jeg ikke kan svaret selv kan jeg prøve å sende deg i retning av noen som kan mer🤓
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div className="chatmessage human">
-                            <img className="avatar" src={require('./images/default_avatar.jpg')} />
-                            <div className="message">
-                                Hva kan du gjøre?
-                            </div>
-                        </div>
-                        <div className="chatmessage bot">
-                            <img className="avatar" src={require('./images/kindly-happy.svg')} />
-                            <div className="message">
-                                Jeg kan hjelpe deg med spørsmål du har om Convertelligence, produktene våre og kundeservice! Jeg er nyansatt og under opplæring så jeg kan ikke svare på alt enda, men jeg lærer nye ting hver dag, og hvis jeg ikke kan svaret selv kan jeg prøve å sende deg i retning av noen som kan mer🤓
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div className="chatmessage human">
-                            <img className="avatar" src={require('./images/default_avatar.jpg')} />
-                            <div className="message">
-                                Hva kan du gjøre?
-                            </div>
-                        </div>
-                        <div className="chatmessage bot">
-                            <img className="avatar" src={require('./images/kindly-happy.svg')} />
-                            <div className="message">
-                                Jeg kan hjelpe deg med spørsmål du har om Convertelligence, produktene våre og kundeservice! Jeg er nyansatt og under opplæring så jeg kan ikke svare på alt enda, men jeg lærer nye ting hver dag, og hvis jeg ikke kan svaret selv kan jeg prøve å sende deg i retning av noen som kan mer🤓
-                            </div>
-                        </div>
-                    </div>
+                    {
+                        this.state.chatmessages.map((chatmessage) => {
+                            // <Message key={message._id}
+                            //         message={message}
+                            //         quickReply={this.quickReply.bind(this)} />
+                            let wrapperClassNames = classNames({
+                                'chatmessage': true,
+                                'human': !chatmessage.from_bot,
+                                'bot': chatmessage.from_bot,
+                            });
+                            let avatar = (
+                                <img className="avatar" src={require('./images/default_avatar.jpg')} />
+                            );
+                            if (chatmessage.from_bot) {
+                                avatar = (
+                                    <img className="avatar" src={require('./images/kindly-happy.svg')} />
+                                );
+                            }
+                            return (
+                                <div>
+                                    <div className={wrapperClassNames}>
+                                        {avatar}
+                                        <div className="message">
+                                            {chatmessage.message}
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
                 </div>
                 <div className="chat-form">
                     <form onSubmit={this.handleSubmit.bind(this)}>
