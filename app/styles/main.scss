@@ -1,0 +1,134 @@
+@import "~normalize.css/normalize.css";
+
+@font-face {
+    font-family: 'FaktPro';
+    font-weight: 400;
+    src: url('../fonts/FaktPro-Normal.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'FaktProLight';
+    src: url('../fonts/FaktPro-Light.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'FaktProBlond';
+    src: url('../fonts/FaktPro-Blond.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'FaktProBlondItalic';
+    font-style: italic;
+    src: url('../fonts/FaktPro-BlondItalic.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'FaktProMedium';
+    src: url('../fonts/FaktPro-Medium.otf') format('opentype');
+}
+
+
+body {
+    font: 25px "FaktProLight", Helvetica, Arial, sans-serif;
+    background: #F2F3F8;
+    color: #000;
+}
+
+textarea, input { outline: none; }
+
+input[type="text"] {
+    width: 100%;
+    font-family: "FaktProLight";
+    font-size: 30px;
+    line-height: 30px;
+    padding: 8px;
+    border: 0px;
+    border-radius: 8px;
+    background: transparent;
+    resize: vertical;
+    color: #000;
+}
+
+.chat-demo {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.chat-messages {
+    flex-grow: 1;
+    overflow-y: scroll;
+    padding-top: 20px;
+}
+
+.chat-form {
+    padding: 25px;
+}
+
+
+
+.chatmessage {
+    display: block;
+    position: relative;
+    width: 60%;
+    margin-bottom: 30px;
+}
+.chatmessage.human {
+    float: right;
+    padding-right: 20%;
+}
+.chatmessage.human .message {
+    background: #CFEDFF;
+    float: right;
+}
+.chatmessage.human .avatar {
+    top: 0px;
+    right: 10%;
+    box-shadow: 0 10px 30px rgba(0,0,0,.1);
+    border-radius: 50%;
+}
+.chatmessage.bot {
+    float: left;
+    padding-left: 20%;
+}
+.chatmessage.bot .message {
+    background: #FFC34A;
+    float: left;
+}
+.chatmessage.bot .avatar {
+    top: 0px;
+    left: 10%;
+    box-shadow: 0 10px 30px rgba(0,0,0,.1);
+    border-radius: 50%;
+}
+.chatmessage .avatar {
+    position: absolute;
+    width: 8%;
+    height: auto;
+}
+
+.chatmessage .timestamp {
+    font-family: "FaktPro";
+    font-size: 10px;
+    line-height: 12px;
+    color: #000;
+    opacity: 0.5;
+}
+.chatmessage .message {
+    padding: 25px 20px;
+    color: #000;
+    display: inline-block;
+    border-radius: 4px 8px 8px 8px;
+    word-wrap:break-word;
+    font-size: 22px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.1);
+}

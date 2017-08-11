@@ -1,30 +1,59 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const webpack = require('webpack');
+const webpackMiddleware = require('webpack-dev-middleware');
+const config = require('./webpack.config.js');
+const mongoose = require('mongoose');
 
-var index = require('./routes/index');
-
-// mongo db setup
-var mongoose = require('mongoose');
-
-mongoose.connect(
-    process.env.MONGODB_URI, {
-        useMongoClient: true,
-        reconnectTries: 10000
-    }
-)
-var db = mongoose.connection
-db.on('error', console.error.bind(console, 'mongodb[error]'))
-db.on('timeout', console.error.bind(console, 'mongodb[timeout]'))
+// mongoose.connect(process.env.MONGODB_URI, {
+//     useMongoClient: true,
+//     reconnectTries: 10000,
+// });
+//
+// var db = mongoose.connection;
+// db.on('error', console.error.bind(console, 'mongodb[error]'));
+// db.on('timeout', console.error.bind(console, 'mongodb[timeout]'));
 
 var app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
+const isDeveloping = process.env.NODE_ENV !== 'production';
+if (isDeveloping) {
+    const compiler = webpack(config);
+    const middleware = webpackMiddleware(compiler, {
+        publicPath: config.output.publicPath,
+        contentBase: 'src',
+        stats: {
+            colors: true,
+            hash: false,
+            timings: true,
+            chunks: false,
+            chunkModules: false,
+            modules: false,
+        }
+    });
+
+    app.use(middleware);
+    app.get('/', function response(req, res) {
+        res.write(middleware.fileSystem.readFileSync(path.join(__dirname, 'dist/index.html')));
+        res.end();
+    });
+} else {
+    app.use(express.static(__dirname + '/dist'));
+    app.get('/', function response(req, res) {
+        res.sendFile(path.join(__dirname, 'dist/index.html'));
+    });
+}
+
+// app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'pug');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use('/', require('./routes/index'));
+
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -34,7 +63,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
