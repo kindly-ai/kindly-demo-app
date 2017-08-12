@@ -7,7 +7,7 @@ var axios = require('axios');
 
 class Kindly {
     constructor(props) {
-        // console.log(props);
+        this.api_key = props.API_KEY;
     }
 
     /**
@@ -17,18 +17,11 @@ class Kindly {
      */
 
     reply(data) {
-        console.log("KINDLY HANDLE MESSAGE");
-        console.log(data);
-
-        axios
-        .post(
-            'http://192.168.1.3:3000/app/webhooks',
-            {
-                api_key: "BfjMxRtJWZD49PWcgU2A77LUwivBC4rjzXoFVwP9Fy4hzjGFMdxwToL1InsRhUta",
-                user_id: data.user_id,
-                message: data.message,
-            }
-        )
+        axios.post(process.env.KINDLY_WEBHOOK_URL, {
+            api_key: this.api_key,
+            user_id: data.user_id,
+            message: data.message,
+        });
     }
 };
 

@@ -8,6 +8,7 @@ router.get('/chatmessages', function(req, res) {
         res.json(chatmessages);
     });
 });
+
 router.post('/chatmessage', function(req, res) {
     res.json({});
 
@@ -31,19 +32,6 @@ router.post('/chatmessage', function(req, res) {
         message: chatmessage.message,
         user_id: chatmessage.chat_id,
     });
-
-    // setTimeout(() => {
-    //
-    //     let chatmessage_reply = new models.ChatMessage({
-    //         chat_id: req.body.chat_id,
-    //         message: "asdfasdf",
-    //         from_bot: true,
-    //     });
-    //     chatmessage_reply.save();
-    //
-    //     req.io.sockets.emit('chatmessage', chatmessage_reply);
-    //
-    // }, 1000);
 });
 
 module.exports = router;

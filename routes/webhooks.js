@@ -3,9 +3,16 @@ var models = require('../models');
 var router = express.Router();
 
 router.post('/', function(req, res) {
-    console.log("RESPONSE FROM KINDLY WEBHOOK");
-    console.log(req.body);
     res.json({});
+    
+    let reply = new models.ChatMessage({
+        chat_id: req.body.user_id,
+        message: req.body.message,
+        from_bot: true,
+    });
+    reply.save();
+
+    req.io.sockets.emit('chatmessage', reply);
 });
 
 module.exports = router;
