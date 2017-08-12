@@ -20,7 +20,7 @@ export default class App extends React.Component {
         });
         this.socket.on('chatmessage', this.messageReceived);
         axios
-        .get('/chatmessages')
+        .get('/api/chatmessages')
         .then((response) => {
             this.setState({
                 chatmessages: response.data,
@@ -47,7 +47,7 @@ export default class App extends React.Component {
         }
 
         axios.post(
-            '/chatmessage',
+            '/api/chatmessage',
             {
                 chat_id: "598dcde4b98a0b0010ccaf56",
                 message: obj.message,
