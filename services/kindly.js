@@ -1,3 +1,5 @@
+var axios = require('axios');
+
 /**
  * Kindly Service Class
  * Wrapper, export and initializer
@@ -5,7 +7,7 @@
 
 class Kindly {
     constructor(props) {
-        console.log(props);
+        // console.log(props);
     }
 
     /**
@@ -17,9 +19,16 @@ class Kindly {
     reply(data) {
         console.log("KINDLY HANDLE MESSAGE");
         console.log(data);
-        // return new Promise((fulfill, reject) => {
-        //     fulfill({message: "LOL!"});
-        // });
+
+        axios
+        .post(
+            'http://192.168.1.3:3000/app/webhooks',
+            {
+                api_key: "BfjMxRtJWZD49PWcgU2A77LUwivBC4rjzXoFVwP9Fy4hzjGFMdxwToL1InsRhUta",
+                user_id: data.user_id,
+                message: data.message,
+            }
+        )
     }
 };
 

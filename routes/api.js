@@ -32,18 +32,18 @@ router.post('/chatmessage', function(req, res) {
         user_id: chatmessage.chat_id,
     });
 
-    setTimeout(() => {
-
-        let chatmessage_reply = new models.ChatMessage({
-            chat_id: req.body.chat_id,
-            message: "asdfasdf",
-            from_bot: true,
-        });
-        chatmessage_reply.save();
-
-        req.io.sockets.emit('chatmessage', chatmessage_reply);
-
-    }, 1000);
+    // setTimeout(() => {
+    //
+    //     let chatmessage_reply = new models.ChatMessage({
+    //         chat_id: req.body.chat_id,
+    //         message: "asdfasdf",
+    //         from_bot: true,
+    //     });
+    //     chatmessage_reply.save();
+    //
+    //     req.io.sockets.emit('chatmessage', chatmessage_reply);
+    //
+    // }, 1000);
 });
 
 module.exports = router;
