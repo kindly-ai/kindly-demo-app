@@ -3,6 +3,7 @@
     "version": "0.0.0",
     "private": true,
     "scripts": {
+        "heroku": "node app.js",
         "server": "nodemon app.js",
         "start": "webpack-dev-server --config webpack.js",
         "prod": "webpack -p --env=prod --config webpack.js --progress --display-error-details",
