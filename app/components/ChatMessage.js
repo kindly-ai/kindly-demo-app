@@ -1,37 +1,12 @@
 import React from 'react';
 import classNames from 'classnames';
+import Button from './Button';
 
 export default class ChatMessage extends React.Component {
     constructor(props) {
         super(props);
-        // this.state = {
-        //     chatmessages: [],
-        // };
-        // this.sendMessage = this.sendMessage.bind(this);
-        // this.messageReceived = this.messageReceived.bind(this);
-    }
-    componentDidMount() {
-        // this.socket = io();
-        // this.socket.on('connect', () => {
-        // });
-        // this.socket.on('chatmessage', this.messageReceived);
-        // axios
-        // .get('/chatmessages')
-        // .then((response) => {
-        //     this.setState({
-        //         chatmessages: response.data,
-        //     });
-        // })
-        // .catch((error) => {
-        //     console.trace(error);
-        // })
-        // .then(() => {
-        //     this.autoScrollToBottom();
-        //     this.messageInput.focus();
-        // });
     }
     render() {
-
         let wrapperClassNames = classNames({
             'chatmessage': true,
             'human': !this.props.chatmessage.from_bot,
@@ -45,6 +20,25 @@ export default class ChatMessage extends React.Component {
                 <img className="avatar" src={require('../images/kindly-happy.svg')} />
             );
         }
+        let buttons = null;
+        if (this.props.chatmessage.buttons.length > 0) {
+            buttons = (
+                <div className="buttons">
+                    {
+                        this.props.chatmessage.buttons.map((button) => {
+                            // <a key={button.id} href="#" className="button">
+                            //     {button.label}
+                            // </a>
+                            return (
+                                <Button key={button.id}
+                                        button={button}
+                                        quickReply={this.props.quickReply} />
+                            )
+                        })
+                    }
+                </div>
+            );
+        }
         return (
             <div key={this.props.chatmessage._id}>
                 <div className={wrapperClassNames}>
@@ -53,6 +47,7 @@ export default class ChatMessage extends React.Component {
                         {this.props.chatmessage.message}
                     </div>
                 </div>
+                {buttons}
             </div>
         )
     }

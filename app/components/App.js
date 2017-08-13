@@ -16,20 +16,15 @@ export default class App extends React.Component {
     }
     componentDidMount() {
         this.socket = io();
-        this.socket.on('connect', () => {
-        });
+        this.socket.on('connect', () => {});
         this.socket.on('chatmessage', this.messageReceived);
-        axios
-        .get('/api/chatmessages')
-        .then((response) => {
+        axios.get('/api/chatmessages').then((response) => {
             this.setState({
                 chatmessages: response.data,
             });
-        })
-        .catch((error) => {
+        }).catch((error) => {
             console.trace(error);
-        })
-        .then(() => {
+        }).then(() => {
             this.autoScrollToBottom();
             this.messageInput.focus();
         });
@@ -46,22 +41,23 @@ export default class App extends React.Component {
             return false;
         }
 
-        axios.post(
-            '/api/chatmessage',
-            {
-                chat_id: "598dcde4b98a0b0010ccaf56",
-                message: obj.message,
-            }
-        );
+        axios.post('/api/chatmessage', {
+            chat_id: "598dcde4b98a0b0010ccaf56",
+            message: obj.message,
+        });
+
         this.messageInput.value = "";
     }
     messageReceived(chatmessage) {
         this.setState(function(state) {
             return {
-                chatmessages: state.chatmessages.concat(chatmessage)
+                chatmessages: state.chatmessages.concat(chatmessage),
             }
         });
         this.autoScrollToBottom();
+    }
+    quickReply(button) {
+        console.log(button);
     }
     autoScrollToBottom() {
         const scrollHeight          = this.messageList.scrollHeight;
@@ -76,7 +72,9 @@ export default class App extends React.Component {
                 {
                     this.state.chatmessages.map((chatmessage) => {
                         return (
-                            <ChatMessage key={chatmessage._id} chatmessage={chatmessage} />
+                            <ChatMessage key={chatmessage._id}
+                                         chatmessage={chatmessage}
+                                         quickReply={this.quickReply.bind(this)} />
                         )
                     })
                 }

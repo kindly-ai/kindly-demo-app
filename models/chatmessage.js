@@ -6,6 +6,7 @@ let chatmessageSchema = Schema(
         chat_id: String,
         message: String,
         from_bot: Boolean,
+        buttons: Array,
     },
     {
         collection: 'chatmessage',
