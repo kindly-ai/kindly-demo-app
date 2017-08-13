@@ -10,17 +10,17 @@
     position: relative;
     // animation: 1s bulge infinite ease-out;
     span {
-        height: 12px;
-        width: 12px;
+        height: 13px;
+        width: 13px;
         float: left;
         margin: 0 2px;
         background-color: #fff;
         display: block;
         border-radius: 50%;
-        opacity: 0.9;
+        opacity: 1;
         @for $i from 1 through 3 {
             &:nth-of-type(#{$i}) {
-                animation: 1s blink infinite ($i * .3333s);
+                animation: 1s blink infinite ($i * .333s);
             }
         }
     }
@@ -28,7 +28,8 @@
 
 @keyframes blink {
     50% {
-        opacity: 0.5;
+        opacity: 0.7;
+        background: #FFC34A;
     }
 }
 
