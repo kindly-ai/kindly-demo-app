@@ -17,11 +17,13 @@ class Kindly {
      */
 
     reply(data) {
-        axios.post(process.env.KINDLY_WEBHOOK_URL, {
+        axios.post(process.env.KINDLY_API_HOST + '/api/v1/app/webhooks', {
             api_key:        this.api_key,
             user_id:        data.user_id,
             message:        data.message,
             exchange_id:    data.exchange_id,
+        }).catch((error) => {
+            console.log(error);
         });
     }
 };
