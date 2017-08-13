@@ -2,12 +2,10 @@ const debug = require('debug')('kindly-app-js:server');
 const http = require('http');
 const express = require('express');
 const path = require('path');
+const cors = require('cors');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const webpack = require('webpack');
-const webpackMiddleware = require('webpack-dev-middleware');
-const config = require('./webpack.config.js');
 const mongoose = require('mongoose');
 
 /**
@@ -32,38 +30,6 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'mongodb[error]'));
 db.on('timeout', console.error.bind(console, 'mongodb[timeout]'));
 
-/**
- * Start webpack
- */
-
-const isDeveloping = process.env.NODE_ENV !== 'production';
-if (isDeveloping) {
-    const compiler = webpack(config);
-    const middleware = webpackMiddleware(compiler, {
-        publicPath: config.output.publicPath,
-        contentBase: 'src',
-        stats: {
-            colors:         true,
-            hash:           false,
-            timings:        true,
-            chunks:         false,
-            chunkModules:   false,
-            modules:        false,
-        }
-    });
-
-    app.use(middleware);
-    app.get('/', function response(req, res) {
-        res.write(middleware.fileSystem.readFileSync(path.join(__dirname, 'dist/index.html')));
-        res.end();
-    });
-} else {
-    app.use(express.static(__dirname + '/dist'));
-    app.get('/', function response(req, res) {
-        res.sendFile(path.join(__dirname, 'dist/index.html'));
-    });
-}
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -83,17 +49,13 @@ app.use(function(req, res, next){
     next();
 });
 
-/**
- * Include API routes
- */
-
-app.use('/', require('./routes/index'));
-
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-// app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors());
+app.options('*', cors());
+app.use('/', require('./routes/index'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

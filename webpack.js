@@ -1,15 +1,15 @@
 'use strict';
-
-const path = require('path');
 const webpack = require('webpack');
+const path = require('path');
+const merge = require('webpack-merge');
+const Dotenv = require('dotenv-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const extractSass = new ExtractTextPlugin({
     filename: "[name].css",
 });
-
-module.exports = {
-    devtool: 'eval-source-map',
+const common = {
+    // devtool: 'eval-source-map',
     entry: [
         path.join(__dirname, 'app/main.js')
     ],
@@ -27,7 +27,10 @@ module.exports = {
         }),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('development')
-        })
+        }),
+        new Dotenv({
+            path: "./.env"
+        }),
     ],
     module: {
         rules: [
@@ -69,3 +72,11 @@ module.exports = {
         ]
     }
 };
+
+module.exports = function(env) {
+    if (env) {
+        return merge(require(`./webpack.${env}.js`), common);
+    } else {
+        return common;
+    }
+}

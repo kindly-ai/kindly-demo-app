@@ -7,7 +7,7 @@ services:
     web:
         env_file: .env
         build: .
-        command: bash -c "npm start"
+        command: bash -c "npm run server"
         volumes:
             - .:/code
         ports:
