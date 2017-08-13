@@ -4,7 +4,11 @@ var router = express.Router();
 var kindly = require('../services/kindly');
 
 router.get('/chatmessages', function(req, res) {
-    models.ChatMessage.find({}, function(err, chatmessages) {
+    models.ChatMessage
+    .find({})
+    .sort({$natural: -1})
+    .limit(100)
+    .exec(function(err, chatmessages) {
         res.json(chatmessages);
     });
 });
