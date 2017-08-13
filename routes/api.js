@@ -22,6 +22,7 @@ router.post('/chatmessage', function(req, res) {
         from_bot: false,
     });
     chatmessage.save();
+
     req.io.sockets.emit('chatmessage', chatmessage);
 
     /**

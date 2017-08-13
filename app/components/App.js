@@ -15,9 +15,19 @@ export default class App extends React.Component {
         this.messageReceived = this.messageReceived.bind(this);
     }
     componentDidMount() {
+
+        /**
+         * Connect to websocket server
+         */
+
         this.socket = io(process.env.APP_HOST);
         this.socket.on('connect', () => {});
         this.socket.on('chatmessage', this.messageReceived);
+
+        /**
+         * Get chatmessages from server
+         */
+
         axios.get(process.env.APP_HOST + '/api/chatmessages').then((response) => {
             this.setState({
                 chatmessages: response.data,
