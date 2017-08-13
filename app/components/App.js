@@ -15,10 +15,10 @@ export default class App extends React.Component {
         this.messageReceived = this.messageReceived.bind(this);
     }
     componentDidMount() {
-        this.socket = io(process.env.KINDLY_HOST);
+        this.socket = io(process.env.APP_HOST);
         this.socket.on('connect', () => {});
         this.socket.on('chatmessage', this.messageReceived);
-        axios.get(process.env.KINDLY_HOST + '/api/chatmessages').then((response) => {
+        axios.get(process.env.APP_HOST + '/api/chatmessages').then((response) => {
             this.setState({
                 chatmessages: response.data,
             });
@@ -41,7 +41,7 @@ export default class App extends React.Component {
             return false;
         }
 
-        axios.post(process.env.KINDLY_HOST + '/api/chatmessage', {
+        axios.post(process.env.APP_HOST + '/api/chatmessage', {
             chat_id: "598dcde4b98a0b0010ccaf56",
             message: obj.message,
             exchange_id: obj.exchange_id,
