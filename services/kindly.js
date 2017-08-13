@@ -18,9 +18,10 @@ class Kindly {
 
     reply(data) {
         axios.post(process.env.KINDLY_WEBHOOK_URL, {
-            api_key: this.api_key,
-            user_id: data.user_id,
-            message: data.message,
+            api_key:        this.api_key,
+            user_id:        data.user_id,
+            message:        data.message,
+            exchange_id:    data.exchange_id,
         });
     }
 };

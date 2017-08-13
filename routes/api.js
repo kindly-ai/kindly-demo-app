@@ -29,8 +29,9 @@ router.post('/chatmessage', function(req, res) {
      */
 
     kindly.reply({
-        message: chatmessage.message,
         user_id: chatmessage.chat_id,
+        exchange_id: req.body.exchange_id,
+        message: chatmessage.message,
     });
 });
 

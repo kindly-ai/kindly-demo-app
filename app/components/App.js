@@ -44,6 +44,7 @@ export default class App extends React.Component {
         axios.post('/api/chatmessage', {
             chat_id: "598dcde4b98a0b0010ccaf56",
             message: obj.message,
+            exchange_id: obj.exchange_id,
         });
 
         this.messageInput.value = "";
@@ -57,7 +58,10 @@ export default class App extends React.Component {
         this.autoScrollToBottom();
     }
     quickReply(button) {
-        console.log(button);
+        this.sendMessage({
+            message:        button.value,
+            exchange_id:    button.exchange_id,
+        });
     }
     autoScrollToBottom() {
         const scrollHeight          = this.messageList.scrollHeight;
