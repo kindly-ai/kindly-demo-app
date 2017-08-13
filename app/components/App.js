@@ -10,9 +10,12 @@ export default class App extends React.Component {
         super(props);
         this.state = {
             chatmessages: [],
+            bot_typing: false,
         };
         this.sendMessage = this.sendMessage.bind(this);
         this.messageReceived = this.messageReceived.bind(this);
+        this.typingMessage      = this.typingMessage.bind(this);
+        this.showMessage        = this.showMessage.bind(this);
     }
     componentDidMount() {
 
@@ -60,9 +63,31 @@ export default class App extends React.Component {
         this.messageInput.value = "";
     }
     messageReceived(chatmessage) {
+        if (chatmessage.from_bot) {
+            this.typingMessage(chatmessage);
+        } else {
+            this.showMessage(chatmessage);
+        }
+    }
+    typingMessage(message) {
+        this.setState({
+            bot_typing: true,
+        });
+
+        this.autoScrollToBottom();
+
+        setTimeout(() => {
+            this.setState({
+                bot_typing: false,
+            });
+            this.showMessage(message);
+        }, 1000);
+    }
+
+    showMessage(chatmessage) {
         this.setState(function(state) {
             return {
-                chatmessages: state.chatmessages.concat(chatmessage),
+                chatmessages: state.chatmessages.concat(chatmessage)
             }
         });
         this.autoScrollToBottom();
@@ -80,6 +105,22 @@ export default class App extends React.Component {
         this.messageList.scrollTop  = maxScrollTop > 0 ? maxScrollTop : 0;
     }
     render() {
+        let typing_indicator = null;
+        if (this.state.bot_typing) {
+            typing_indicator = (
+                <div className="chatmessage bot">
+                    <img className="avatar" src={require('../images/kindly-happy.svg')} />
+                    <div className="message">
+                        <div className="typing-indicator">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
         return (
             <div className="chat-demo">
                 <div className="chat-messages" ref={(div) => { this.messageList = div; }}>
@@ -92,6 +133,7 @@ export default class App extends React.Component {
                         )
                     })
                 }
+                {typing_indicator}
                 </div>
                 <div className="chat-form">
                     <form onSubmit={this.handleSubmit.bind(this)}>
