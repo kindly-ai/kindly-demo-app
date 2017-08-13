@@ -6,5 +6,5 @@
 
 # Starting frontend
 
-`nvm use` to set the right node version
+`nvm use` to set the right node version  
 `npm start` to launch webpack-dev-server
