@@ -1,4 +1,4 @@
-const debug = require('debug')('kindly-app-js:server');
+const debug = require('debug')('kindly-demo:server');
 const http = require('http');
 const express = require('express');
 const path = require('path');
