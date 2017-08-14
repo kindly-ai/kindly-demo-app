@@ -17,7 +17,7 @@ class Kindly {
      */
 
     reply(data) {
-        axios.post(process.env.KINDLY_API_HOST + '/api/v1/app/webhooks', {
+        axios.post(process.env.KINDLY_API_HOST + '/api/v1/send', {
             api_key:        this.api_key,
             user_id:        data.user_id,
             message:        data.message,
