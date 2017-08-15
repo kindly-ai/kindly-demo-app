@@ -16,7 +16,7 @@ class Kindly {
      * data: {message: String, user_id: String}
      */
 
-    reply(data) {
+    send(data) {
         axios.post(process.env.KINDLY_API_HOST + '/api/v1/send', {
             api_key:        this.api_key,
             user_id:        data.user_id,

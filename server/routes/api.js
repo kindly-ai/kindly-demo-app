@@ -35,7 +35,7 @@ router.post('/chatmessage', function(req, res) {
      * Get reply from Kindly
      */
 
-    kindly.reply({
+    kindly.send({
         user_id:        chatmessage.chat_id,
         exchange_id:    req.body.exchange_id,
         message:        chatmessage.message,
