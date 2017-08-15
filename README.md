@@ -2,7 +2,7 @@
 
 This is a demo-application by Convertelligence for the purpose of demonstrating how third-party applications can connect to Kindly.
 
-[See documentation](https://kindly.gitbooks.io/kindly/).
+[Go to Kindly documentation](https://kindly.gitbooks.io/kindly/).
 
 ## Setting up application locally
 
@@ -19,8 +19,8 @@ Edit `.env` file. The fields are described below
 #### Environment values
 
 `PORT=5000` is the port which the demo application server will use (leave as is)  
-`MONGODB_URI=mongodb://mongo/test` is a pointer to mongodb running in docker. (leave as is)  
-`APP_HOST=http://localhost:5000` is a pointer to the demo application running in docker. (leave as is)  
+`MONGODB_URI=mongodb://mongo/test` is a pointer to mongodb running in docker (leave as is)  
+`APP_HOST=http://localhost:5000` is a pointer to the demo application running in docker (leave as is)  
 `KINDLY_API_HOST=https://bot.kindly.ai` is the pointer to the Kindly API (leave as is)  
 `KINDLY_API_KEY=YOUR_API_KEY` **must** be changed to your API KEY  
 
