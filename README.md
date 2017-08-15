@@ -24,7 +24,7 @@ Edit `.env` file. The fields are described below
 `KINDLY_API_HOST=https://bot.kindly.ai` is the pointer to the Kindly API (leave as is)  
 `KINDLY_API_KEY=YOUR_API_KEY` **must** be changed to your API KEY  
 
-### Starting dev server
+## Starting application locally
 
 1. Open terminal  
 2. Run `docker-compose up` in terminal window #1. This starts MongoDB and Node js server.  
