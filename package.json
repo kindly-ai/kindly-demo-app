@@ -20,7 +20,7 @@
         "cors": "^2.8.4",
         "debug": "~2.6.3",
         "express": "^4.15.4",
-        "kindly-js": "file:../kindly-js/kindly-js-1.0.0.tgz",
+        "kindly-js": "1.0.0",
         "mongoose": "^4.11.5",
         "morgan": "~1.8.1",
         "normalize.css": "^7.0.0",
