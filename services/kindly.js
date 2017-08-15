@@ -23,7 +23,7 @@ class Kindly {
             message:        data.message,
             exchange_id:    data.exchange_id,
         }).catch((error) => {
-            console.log(error);
+            console.trace(error);
         });
     }
 };

@@ -7,6 +7,7 @@ let chatmessageSchema = Schema(
         message: String,
         from_bot: Boolean,
         buttons: Array,
+        created: {type: Date, default: Date.now},
     },
     {
         collection: 'chatmessage',

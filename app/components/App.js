@@ -4,18 +4,28 @@ import styles from '../styles/main.scss';
 import classNames from 'classnames';
 import io from 'socket.io-client';
 import ChatMessage from './ChatMessage';
+import rand from 'random-key';
 
 export default class App extends React.Component {
     constructor(props) {
         super(props);
+
+        let chat_id = localStorage.getItem('chat_id');
+        if (!chat_id) {
+            chat_id = rand.generate(30);
+            localStorage.setItem('chat_id', chat_id);
+        }
+
         this.state = {
+            chat_id: chat_id,
             chatmessages: [],
             bot_typing: false,
         };
+
         this.sendMessage = this.sendMessage.bind(this);
         this.messageReceived = this.messageReceived.bind(this);
-        this.typingMessage      = this.typingMessage.bind(this);
-        this.showMessage        = this.showMessage.bind(this);
+        this.typingMessage = this.typingMessage.bind(this);
+        this.showMessage = this.showMessage.bind(this);
     }
     componentDidMount() {
 
@@ -25,19 +35,26 @@ export default class App extends React.Component {
 
         this.socket = io(process.env.APP_HOST);
         this.socket.on('connect', () => {});
-        this.socket.on('chatmessage', this.messageReceived);
+        this.socket.on('chatmessage-' + this.state.chat_id, this.messageReceived);
 
         /**
          * Get chatmessages from server
          */
 
-        axios.get(process.env.APP_HOST + '/api/chatmessages').then((response) => {
+        axios.get(
+            process.env.APP_HOST +
+            '/api/chatmessages' +
+            '?chat_id=' + this.state.chat_id
+        )
+        .then((response) => {
             this.setState({
                 chatmessages: response.data,
             });
-        }).catch((error) => {
+        })
+        .catch((error) => {
             console.trace(error);
-        }).then(() => {
+        })
+        .then(() => {
             this.autoScrollToBottom();
             this.messageInput.focus();
         });
@@ -55,7 +72,7 @@ export default class App extends React.Component {
         }
 
         axios.post(process.env.APP_HOST + '/api/chatmessage', {
-            chat_id: "598dcde4b98a0b0010ccaf56",
+            chat_id: this.state.chat_id,
             message: obj.message,
             exchange_id: obj.exchange_id,
         });

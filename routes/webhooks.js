@@ -13,7 +13,7 @@ router.post('/', function(req, res) {
     });
     reply.save();
 
-    req.io.sockets.emit('chatmessage', reply);
+    req.io.sockets.emit('chatmessage-' + reply.chat_id, reply);
 });
 
 module.exports = router;

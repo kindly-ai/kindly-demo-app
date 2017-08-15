@@ -25,6 +25,7 @@
         "morgan": "~1.8.1",
         "normalize.css": "^7.0.0",
         "pug": "~2.0.0-beta11",
+        "random-key": "^0.3.2",
         "react": "^0.14.3",
         "react-dom": "^0.14.3",
         "resolve-url-loader": "^2.1.0",

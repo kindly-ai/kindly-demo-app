@@ -38,9 +38,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
  */
 
 const io = require('socket.io')(server);
-io.on('connection', function(socket){
-    // console.log(socket);
-    // console.log("LOLz");
+io.on('connection', function (socket){
+
 });
 
 // Make io accessible to our router
@@ -69,10 +68,9 @@ app.use(function(err, req, res, next) {
     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-    // render the error page
+    console.trace(err);
     res.status(err.status || 500);
-    res.render('error');
+    res.end('error');
 });
 
 server.on('error', function (error) {
