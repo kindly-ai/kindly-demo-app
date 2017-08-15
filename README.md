@@ -1,8 +1,8 @@
 # Kindly Demo App
 
-This is a demo-application by Convertelligence for the purpose of demonstrating how third-party applications can connect to Kindly. [View live demo](http://kindly-demo-production.firebaseapp.com).
+This is a demo-application by Convertelligence for the purpose of demonstrating how third-party applications can connect to Kindly.
 
-[Go to Kindly documentation](https://kindly.gitbooks.io/kindly/).
+[View live demo](http://kindly-demo-production.firebaseapp.com) | [Go to Kindly documentation](https://kindly.gitbooks.io/kindly/)
 
 ## Setting up application locally
 
