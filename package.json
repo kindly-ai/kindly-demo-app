@@ -6,8 +6,7 @@
         "heroku": "node app.js",
         "server": "nodemon app.js",
         "start": "webpack-dev-server --config webpack.js",
-        "prod": "webpack -p --env=prod --config webpack.js --progress --display-error-details",
-        "seed": "node seed.js"
+        "prod": "webpack -p --env=prod --config webpack.js --progress --display-error-details"
     },
     "engines": {
         "node": "8.0.0",
