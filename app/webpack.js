@@ -9,19 +9,18 @@ const extractSass = new ExtractTextPlugin({
     filename: "[name].css",
 });
 const common = {
-    // devtool: 'eval-source-map',
     entry: [
-        path.join(__dirname, 'app/main.js')
+        path.join(__dirname, 'main.js')
     ],
     output: {
-        path: path.join(__dirname, '/dist/'),
+        path: path.join(__dirname, '..', 'dist'),
         filename: '[name].js',
         publicPath: '/'
     },
     plugins: [
         extractSass,
         new HtmlWebpackPlugin({
-            template: 'app/index.tpl.html',
+            template: path.join(__dirname, 'index.tpl.html'),
             inject: 'body',
             filename: 'index.html'
         }),
@@ -29,7 +28,7 @@ const common = {
             'process.env.NODE_ENV': JSON.stringify('development')
         }),
         new Dotenv({
-            path: "./.env"
+            path: path.join(__dirname, '..', '.env'),
         }),
     ],
     module: {
