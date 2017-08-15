@@ -28,7 +28,8 @@ Edit `.env` file. The fields are described below
 
 ## Starting application locally
 
-1. Open terminal  
+1. Open two terminal windows/tabs.  
 2. Run `docker-compose up` in terminal window #1. This starts MongoDB and Node js server.  
-3. Run `npm start` in terminal window #2. This starts the webpack-dev-server  
-4. Visit [http://localhost:8080](http://localhost:8080)  
+3. Run `nvm use` in terminal window #2 to set the required node version.  
+4. Run `npm start` in terminal window #2. This starts the webpack-dev-server.  
+5. Visit [http://localhost:8080](http://localhost:8080).  
