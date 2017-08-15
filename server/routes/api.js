@@ -1,7 +1,10 @@
 var express = require('express');
 var models = require('../models');
 var router = express.Router();
-var kindly = require('../services/kindly');
+var kindly = require('kindly-js');
+
+kindly.API_HOST = process.env.KINDLY_API_HOST;
+kindly.API_KEY = process.env.KINDLY_API_KEY;
 
 router.get('/chatmessages', function(req, res) {
     models.ChatMessage
@@ -14,6 +17,7 @@ router.get('/chatmessages', function(req, res) {
         res.json(chatmessages.reverse());
     });
 });
+
 
 router.post('/chatmessage', function(req, res) {
     res.json({});
