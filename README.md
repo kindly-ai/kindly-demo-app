@@ -6,7 +6,7 @@ This is a demo-application by Convertelligence for the purpose of demonstrating 
 
 [View live demo](http://kindly-demo-production.firebaseapp.com) | [Go to Kindly documentation](https://kindly.gitbooks.io/kindly/)
 
-## Setting up application locally
+## Setting up application
 
 ### Prerequisites
 
@@ -26,7 +26,7 @@ Edit `.env` file. The fields are described below
 `KINDLY_API_HOST=https://bot.kindly.ai` is the pointer to the Kindly API (leave as is)  
 `KINDLY_API_KEY=YOUR_API_KEY` **must** be changed to your API KEY  
 
-## Starting application locally
+## Starting application
 
 1. Open two terminal windows/tabs.  
 2. Run `docker-compose up` in terminal window #1. This starts MongoDB and Node js server.  
