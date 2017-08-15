@@ -13,12 +13,11 @@ This is a demo-application by Convertelligence for the purpose of demonstrating 
 * Docker & docker-compose
 * nvm
 
-### Set up your environment
+### Set your env variables
 
-Run `cp .env.default .env` to create your environment file  
-Edit `.env` file. The fields are described below
+Run `cp .env.default .env` to copy your environment file.
 
-#### Environment values
+Edit `.env` file. The variables are described below:
 
 `PORT=5000` is the port which the demo application server will use (leave as is)  
 `MONGODB_URI=mongodb://mongo/test` is a pointer to mongodb running in docker (leave as is)  
@@ -31,5 +30,6 @@ Edit `.env` file. The fields are described below
 1. Open two terminal windows/tabs.  
 2. Run `docker-compose up` in terminal window #1. This starts MongoDB and Node js server.  
 3. Run `nvm use` in terminal window #2 to set the required node version.  
-4. Run `npm start` in terminal window #2. This starts the webpack-dev-server.  
-5. Visit [http://localhost:8080](http://localhost:8080).  
+4. Run `npm install` in terminal window #2 to install required packages.
+5. Run `npm start` in terminal window #2. This starts the webpack-dev-server.  
+6. Visit [http://localhost:8080](http://localhost:8080).  
