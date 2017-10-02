@@ -1,4 +1,5 @@
 node_modules/
 dist/
-.env.prod
 .env
+.env.demo
+.env.kommunebot

@@ -7,7 +7,7 @@ module.exports = {
         path: path.join(__dirname, 'dist', 'prod')
     },
     plugins: [
-        new Dotenv({path: "./.env.prod"}),
+        new Dotenv({path: "./.env.demo"}),
         new webpack.optimize.UglifyJsPlugin({
             compressor: {
                 warnings: false

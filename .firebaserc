@@ -1,5 +1,6 @@
 {
     "projects": {
-        "production": "kindly-demo-production"
+        "demo": "kindly-demo-production",
+        "kommunebot": "kommunebot"
     }
 }
