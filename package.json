@@ -6,8 +6,7 @@
         "heroku": "node server/app.js",
         "server": "nodemon server/app.js",
         "start": "webpack-dev-server --config app/webpack.js",
-        "build_demo": "webpack -p --env=demo --config app/webpack.js --progress --display-error-details",
-        "build_kommunebot": "webpack -p --env=kommunebot --config app/webpack.js --progress --display-error-details"
+        "build_demo": "webpack -p --env=demo --config app/webpack.js --progress --display-error-details"
     },
     "engines": {
         "node": "8.0.0",
