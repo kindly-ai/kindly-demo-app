@@ -10,15 +10,15 @@ export default class Button extends React.Component {
   }
 
   onClick(event) {
-    if (this.props.button.type == 'link') {
+    if (['link', 'EXTERNAL_LINK'].includes(this.props.button.type)) {
       window.open(this.props.button.value, '_blank');
     }
 
-    if (this.props.button.type == 'phone') {
+    if (['phone', 'PHONE'].includes(this.props.button.type)) {
       window.open('tel:' + this.props.button.value, '_self');
     }
 
-    if (this.props.button.type == 'quick_reply') {
+    if (['quick_reply', 'QUICK_REPLY'].includes(this.props.button.type)) {
       this.props.quickReply({
         value: this.props.button.value,
         exchange_id: this.props.button.exchange_id,
