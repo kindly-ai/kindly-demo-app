@@ -4,7 +4,7 @@ This is a demo-application by Convertelligence for the purpose of demonstrating 
 
 ![Screenshot from demo](/screenshot.png)
 
-[View live demo](http://kindly-demo-production.firebaseapp.com) | [Go to Kindly documentation](https://kindly.gitbooks.io/kindly/)
+[Go to Kindly documentation](https://docs.kindly.ai/)
 
 ## Setting up application
 
